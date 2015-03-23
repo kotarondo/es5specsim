@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="ES5specsim : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ES5specsim</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kotarondo/es5specsim">View on GitHub</a>
+
+          <h1 id="project_title">ES5specsim</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kotarondo/es5specsim/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kotarondo/es5specsim/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="an-ecmascript-51-specification-simulator" class="anchor" href="#an-ecmascript-51-specification-simulator" aria-hidden="true"><span class="octicon octicon-link"></span></a>An ECMAScript 5.1 Specification Simulator</h1>
+
+<p>ES5specsim is a JavaScript interpreter written in JavaScript. It is implemented according to the "ECMAScript 5.1 Specification" without any optimization. So you can easily find one-to-one correspondences between the specification and the implementation.</p>
+
+<p>Although ES5specsim can run in web browsers, there is no use in practice because the running program under ES5specsim cannot access the browser's host objects. What's worse, it runs several hundred times slower than in web browsers. Here are the reasons why ES5specsim is a "simulator".</p>
+
+<p>You may run ES5specsim</p>
+
+<ul>
+<li>if you want to know pure conforming results</li>
+<li>for studying purpose</li>
+<li>just for fun</li>
+</ul>
+
+<h2>
+<a id="how-to-start-es5specsim" class="anchor" href="#how-to-start-es5specsim" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to start ES5specsim</h2>
+
+<ul>
+<li>Download source files and open "es5specsim.html" file in your browser,</li>
+<li>or visit <a href="http://kotarondo.github.io/es5specsim/es5specsim.html">http://kotarondo.github.io/es5specsim/es5specsim.html</a> where they are already installed.</li>
+</ul>
+
+<h2>
+<a id="strict-conformance-flag" class="anchor" href="#strict-conformance-flag" aria-hidden="true"><span class="octicon octicon-link"></span></a>STRICT CONFORMANCE flag</h2>
+
+<p>As default, ES5specsim implements some extensions and modifications in order to pass the es5-tests of the tc39/test262 project. If you want ES5specsim to be strictly conforming to the specification normative only, you can turn on STRICT CONFORMANCE flag.</p>
+
+<p>It <em>disables</em> following supports.</p>
+
+<ul>
+<li>Annex B in the specification</li>
+<li>function declaration as a statement</li>
+<li>regular expression extension</li>
+<li>Unicode 5.1 support (instead of Unicode 3.0)</li>
+</ul>
+
+<h2>
+<a id="why-not-es6" class="anchor" href="#why-not-es6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why not ES6?</h2>
+
+<p>Actually, I'm working on ES6 specification now. Since it has pretty much pages (nearly 600 pages, in contrast ES5 has only 250 pages), it takes longer time to implement, and it needs more effort to support Generator Function. I think ES6specsim will be another project.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ES5specsim maintained by <a href="https://github.com/kotarondo">kotarondo</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
