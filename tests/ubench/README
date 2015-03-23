@@ -1,0 +1,16 @@
+Download following files in this directory.
+
+repository: WebKit/webkit
+branch: master
+folder: PerformanceTests/SunSpider/tests/ubench
+
+files:
+	function-closure.js
+	function-correct-args.js
+	function-empty.js
+	function-excess-args.js
+	function-missing-args.js
+	function-sum.js
+	loop-empty-resolve.js
+	loop-empty.js
+	loop-sum.js

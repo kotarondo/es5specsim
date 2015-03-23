@@ -1,0 +1,33 @@
+Download following files in this directory.
+
+repository: WebKit/webkit
+branch: master
+folder: PerformanceTests/SunSpider/tests/sunspider-1.0.2
+
+files:
+	3d-cube.js
+	3d-morph.js
+	3d-raytrace.js
+	access-binary-trees.js
+	access-fannkuch.js
+	access-nbody.js
+	access-nsieve.js
+	bitops-3bit-bits-in-byte.js
+	bitops-bits-in-byte.js
+	bitops-bitwise-and.js
+	bitops-nsieve-bits.js
+	controlflow-recursive.js
+	crypto-aes.js
+	crypto-md5.js
+	crypto-sha1.js
+	date-format-tofte.js
+	date-format-xparb.js
+	math-cordic.js
+	math-partial-sums.js
+	math-spectral-norm.js
+	regexp-dna.js
+	string-base64.js
+	string-fasta.js
+	string-tagcloud.js
+	string-unpack-code.js
+	string-validate-input.js
