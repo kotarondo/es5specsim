@@ -1,0 +1,11 @@
+Download following files in this directory.
+
+repository: WebKit/webkit
+branch: master
+folder: PerformanceTests/SunSpider/tests/parse-only
+
+files:
+	concat-jquery-mootools-prototype.js
+	jquery-1.3.2.js
+	mootools-1.2.2-core-nc.js
+	prototype-1.6.0.3.js
