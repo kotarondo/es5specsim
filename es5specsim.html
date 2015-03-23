@@ -1,0 +1,161 @@
+<!--
+ Copyright (c) 2015, Kotaro Endo.
+ All rights reserved.
+ 
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ 
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ 
+ 2. Redistributions in binary form must reproduce the above
+    copyright notice, this list of conditions and the following
+    disclaimer in the documentation and/or other materials provided
+    with the distribution.
+ 
+ 3. Neither the name of the copyright holder nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ES5 Specification Simulator</title>
+</head>
+<body>
+	<script src="helper.js" type="text/javascript"></script>
+	<script src="unicode.js" type="text/javascript"></script>
+	<script src="types.js" type="text/javascript"></script>
+	<script src="parser.js" type="text/javascript"></script>
+	<script src="execution.js" type="text/javascript"></script>
+	<script src="expression.js" type="text/javascript"></script>
+	<script src="statement.js" type="text/javascript"></script>
+	<script src="function.js" type="text/javascript"></script>
+	<script src="program.js" type="text/javascript"></script>
+	<script src="builtin.js" type="text/javascript"></script>
+	<script src="builtinGlobal.js" type="text/javascript"></script>
+	<script src="builtinObject.js" type="text/javascript"></script>
+	<script src="builtinFunction.js" type="text/javascript"></script>
+	<script src="builtinArray.js" type="text/javascript"></script>
+	<script src="builtinString.js" type="text/javascript"></script>
+	<script src="builtinBoolean.js" type="text/javascript"></script>
+	<script src="builtinNumber.js" type="text/javascript"></script>
+	<script src="builtinMath.js" type="text/javascript"></script>
+	<script src="builtinRegExp.js" type="text/javascript"></script>
+	<script src="builtinDate.js" type="text/javascript"></script>
+	<script src="builtinError.js" type="text/javascript"></script>
+	<script src="builtinJSON.js" type="text/javascript"></script>
+
+	<h3>ES5 Specification Simulator</h3>
+	<table border='1'>
+		<tr>
+			<td>program</td>
+			<td><textarea id='textarea' cols='80' rows='25'></textarea>
+				<p>
+					<button id='button' onclick='doTest();'>evaluate</button>
+					<button id='button' onclick='clearText();'>clear</button>
+				</p></td>
+		</tr>
+		<tr>
+			<td>completion<p>value</td>
+			<td>
+				<table>
+					<tr>
+						<td>type</td>
+						<td><span id='type'></span></td>
+					</tr>
+					<tr>
+						<td>value</td>
+						<td><span id='value'></span></td>
+					</tr>
+					<tr>
+						<td>target</td>
+						<td><span id='target'></span></td>
+					</tr>
+				</table>
+				<p>
+					<button id='button' onclick='clearResult();'>clear</button>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>realm</td>
+			<td>
+				<p>
+					<input type='checkbox' id='strictf'><label for='strictf'>STRICT
+						CONFORMANCE</label>
+				</p>
+				<p>
+					<button id='button' onclick='doInitialize();'>initialize</button>
+				</p>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		doInitialize();
+		function doInitialize() {
+			var a = document.getElementById('strictf');
+			STRICT_CONFORMANCE = a.checked;
+			initializeVM();
+		}
+
+		function clearText() {
+			document.getElementById("textarea").value = '';
+		}
+
+		function clearResult() {
+			document.getElementById("type").textContent = '';
+			document.getElementById("value").textContent = '';
+			document.getElementById("target").textContent = '';
+		}
+
+		function doTest() {
+			var source = document.getElementById("textarea").value;
+			try {
+				var program = theParser.readProgram(source, false);
+				enterExecutionContextForGlobalCode(program);
+				var stmt = program.evaluate();
+			}
+			catch (e) {
+				if (isInternalError(e)) {
+					console.log("ERROR: " + e);
+					if (e.lineNumber) {
+						console.log("line:" + e.lineNumber);
+					}
+					if (e.stack) {
+						console.log("stack:\n" + e.stack);
+					}
+					return;
+				}
+				var stmt = CompletionValue("throw", e, empty);
+			}
+			if (stmt.value === empty) {
+				document.getElementById('type').textContent = stmt.type + " empty";
+				document.getElementById('value').textContent = "";
+			}
+			else {
+				document.getElementById('type').textContent = stmt.type;
+				document.getElementById('value').textContent = ToString(stmt.value);
+			}
+			if (stmt.target !== empty) {
+				document.getElementById('target').textContent = stmt.target;
+			}
+		}
+	</script>
+</body>
+</html>

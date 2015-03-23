@@ -1,0 +1,14 @@
+Download following files in this directory.
+
+repository: WebKit/webkit
+branch: master
+folder: PerformanceTests/SunSpider/tests/v8-v6
+
+files:
+	v8-crypto.js
+	v8-deltablue.js
+	v8-earley-boyer.js
+	v8-raytrace.js
+	v8-regexp.js
+	v8-richards.js
+	v8-splay.js

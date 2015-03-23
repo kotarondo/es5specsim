@@ -1,0 +1,24 @@
+Download following files in this directory.
+
+repository: tc39/test262
+branch: es5-tests
+folders: website/harness, website/json
+
+files:
+	Date_constants.js
+	Date_library.js
+	ch06.json
+	ch07.json
+	ch08.json
+	ch09.json
+	ch10.json
+	ch11.json
+	ch12.json
+	ch13.json
+	ch14.json
+	ch15.json
+	environment.js
+	math_isequal.js
+	math_precision.js
+	numeric_conversion.js
+	sta.js
