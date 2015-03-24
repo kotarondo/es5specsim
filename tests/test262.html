@@ -61,19 +61,44 @@
 	<script src="../builtinError.js" type="text/javascript"></script>
 	<script src="../builtinJSON.js" type="text/javascript"></script>
 
-	<button id="button" onclick="doTestSuites();" disabled>start</button>
-	<p>success:</p> <div id="success">0</div>
-	<p>fail:</p> <div id="fail">0</div>
-	<p>skip:</p> <div id="skip">0</div>
+    <br><input type='checkbox' checked id='doTest06'><label for='doTest06'>Do Test 06</label>
+    <br><input type='checkbox' checked id='doTest07'><label for='doTest07'>Do Test 07</label>
+    <br><input type='checkbox' checked id='doTest08'><label for='doTest08'>Do Test 08</label>
+    <br><input type='checkbox' checked id='doTest09'><label for='doTest09'>Do Test 09</label>
+    <br><input type='checkbox' checked id='doTest10'><label for='doTest10'>Do Test 10</label>
+    <br><input type='checkbox' checked id='doTest11'><label for='doTest11'>Do Test 11</label>
+    <br><input type='checkbox' checked id='doTest12'><label for='doTest12'>Do Test 12</label>
+    <br><input type='checkbox' checked id='doTest13'><label for='doTest13'>Do Test 13</label>
+    <br><input type='checkbox' checked id='doTest14'><label for='doTest14'>Do Test 14</label>
+    <br><input type='checkbox' checked id='doTest15_1'><label for='doTest15_1'>Do Test 15.1</label>
+    <br><input type='checkbox' checked id='doTest15_2'><label for='doTest15_2'>Do Test 15.2</label>
+    <br><input type='checkbox' checked id='doTest15_3'><label for='doTest15_3'>Do Test 15.3</label>
+    <br><input type='checkbox' checked id='doTest15_4'><label for='doTest15_4'>Do Test 15.4</label>
+    <br><input type='checkbox' checked id='doTest15_5'><label for='doTest15_5'>Do Test 15.5</label>
+    <br><input type='checkbox' checked id='doTest15_6'><label for='doTest15_6'>Do Test 15.6</label>
+    <br><input type='checkbox' checked id='doTest15_7'><label for='doTest15_7'>Do Test 15.7</label>
+    <br><input type='checkbox' checked id='doTest15_8'><label for='doTest15_8'>Do Test 15.8</label>
+    <br><input type='checkbox' checked id='doTest15_9'><label for='doTest15_9'>Do Test 15.9</label>
+    <br><input type='checkbox' checked id='doTest15_10'><label for='doTest15_10'>Do Test 15.10</label>
+    <br><input type='checkbox' checked id='doTest15_11'><label for='doTest15_11'>Do Test 15.11</label>
+    <br><input type='checkbox' checked id='doTest15_12'><label for='doTest15_12'>Do Test 15.12</label>
+	<p><input type='checkbox' id='skipVeryHeavyTests' checked disabled><label for='skipVeryHeavyTests'>Skip Very Heavy Tests</label>
+	<br><input type='checkbox' id='skipHeavyTests' checked><label for='skipHeavyTests'>Skip Heavy Tests</label>
+	<p><input type='checkbox' id='strictf'><label for='strictf'>STRICT CONFORMANCE</label>
+	<p> <button id="button" onclick="doTestSuites();" disabled>start</button>
+	<p>pass:</p>
+	<div id="pass">0</div>
+	<p>fail:</p>
+	<div id="fail">0</div>
+	<p>skip:</p>
+	<div id="skip">0</div>
 	<script type="text/javascript">
-		var stopIfFailed = false;
-
 		// for Tests S15.9.3.1_A5_T*.js
 		LocalTZA = -8 * 3600000;
 		LocalTZAString = "PDT";
 
 		console.log("loading ...");
-		var includes = [ "sta.js", "math_precision.js", "math_isequal.js", "environment.js", "Date_constants.js", "Date_library.js", "numeric_conversion.js"];
+		var includes = [ "sta.js", "math_precision.js", "math_isequal.js", "environment.js", "Date_constants.js", "Date_library.js", "numeric_conversion.js" ];
 		var scriptCache = {};
 		var loaded = 0;
 		for (var i = 0; i < includes.length; i++) {
@@ -96,19 +121,51 @@
 		}
 
 		function doTestSuites() {
-			document.getElementById("button").disabled = true;
-			var successCount = 0;
-			var failCount = 0;
-            var skipCount = 0;
+			stopIfFailed = false;
+			skipVeryHeavyTests = document.getElementById('skipVeryHeavyTests').checked;
+			skipHeavyTests = document.getElementById('skipHeavyTests').checked;
+			STRICT_CONFORMANCE = document.getElementById('strictf').checked;
+			doTest06 = document.getElementById('doTest06').checked;
+			doTest07 = document.getElementById('doTest07').checked;
+			doTest08 = document.getElementById('doTest08').checked;
+			doTest09 = document.getElementById('doTest09').checked;
+			doTest10 = document.getElementById('doTest10').checked;
+			doTest11 = document.getElementById('doTest11').checked;
+			doTest12 = document.getElementById('doTest12').checked;
+			doTest13 = document.getElementById('doTest13').checked;
+			doTest14 = document.getElementById('doTest14').checked;
+			doTest15_1 = document.getElementById('doTest15_1').checked;
+			doTest15_2 = document.getElementById('doTest15_2').checked;
+			doTest15_3 = document.getElementById('doTest15_3').checked;
+			doTest15_4 = document.getElementById('doTest15_4').checked;
+			doTest15_5 = document.getElementById('doTest15_5').checked;
+			doTest15_6 = document.getElementById('doTest15_6').checked;
+			doTest15_7 = document.getElementById('doTest15_7').checked;
+			doTest15_8 = document.getElementById('doTest15_8').checked;
+			doTest15_9 = document.getElementById('doTest15_9').checked;
+			doTest15_10 = document.getElementById('doTest15_10').checked;
+			doTest15_11 = document.getElementById('doTest15_11').checked;
+			doTest15_12 = document.getElementById('doTest15_12').checked;
 
-			var testSuites = [ "test262/ch06.json", "test262/ch07.json", "test262/ch08.json", "test262/ch09.json", "test262/ch10.json",
-					"test262/ch11.json", "test262/ch12.json", "test262/ch13.json", "test262/ch14.json", "test262/ch15.json", ];
+			document.getElementById("button").disabled = true;
+			var passCount = 0;
+			var failCount = 0;
+			var skipCount = 0;
+            document.getElementById("pass").textContent = String(passCount);
+            document.getElementById("fail").textContent = String(failCount);
+            document.getElementById("skip").textContent = String(skipCount);
+			var fails = "";
+
+			var testSuites = [ "test262/ch06.json", "test262/ch07.json", "test262/ch08.json", "test262/ch09.json", "test262/ch10.json", "test262/ch11.json",
+					"test262/ch12.json", "test262/ch13.json", "test262/ch14.json", "test262/ch15.json", ];
 			var index = 0;
 			nextTestSuite();
 
 			function nextTestSuite() {
 				var filename = testSuites[index++];
 				if (filename === undefined) {
+					console.log("FAILED TESTS");
+					console.log(fails);
 					console.log("ALL TESTS DONE");
 					document.getElementById("button").disabled = false;
 					return;
@@ -143,12 +200,13 @@
 						console.log("elapsed: " + (end - begin) + " ms");
 					}
 					if (ok === true) {
-						successCount++;
-						document.getElementById("success").textContent = String(successCount);
+						passCount++;
+						document.getElementById("pass").textContent = String(passCount);
 					}
 					else if (ok === false) {
 						failCount++;
 						document.getElementById("fail").textContent = String(failCount);
+						fails += test.path + '\n';
 						if (stopIfFailed) {
 							index = testSuites.length;
 							setTimeout(nextTestSuite, 0);
@@ -171,7 +229,7 @@
 				var VeryHeavyTests = [ "TestCases/ch15/15.1/15.1.3/15.1.3.1/S15.1.3.1_A2.5_T1.js", "TestCases/ch15/15.1/15.1.3/15.1.3.2/S15.1.3.2_A2.5_T1.js",
 						"TestCases/ch15/15.4/15.4.5/15.4.5.2/S15.4.5.2_A3_T4.js", ];
 				for (var i = 0; i < VeryHeavyTests.length; i++) {
-					if (test.path === VeryHeavyTests[i]) return undefined;
+					if (skipVeryHeavyTests && test.path === VeryHeavyTests[i]) return undefined;
 				}
 
 				var HeavyTests = [ "TestCases/ch07/7.4/S7.4_A5.js", "TestCases/ch07/7.4/S7.4_A6.js", "TestCases/ch07/7.8/7.8.5/S7.8.5_A1.1_T2.js",
@@ -194,30 +252,30 @@
 						"TestCases/ch15/15.1/15.1.3/15.1.3.4/S15.1.3.4_A2.4_T1.js", "TestCases/ch15/15.1/15.1.3/15.1.3.4/S15.1.3.4_A2.4_T2.js",
 						"TestCases/ch15/15.1/15.1.3/15.1.3.4/S15.1.3.4_A2.5_T1.js", ];
 				for (var i = 0; i < HeavyTests.length; i++) {
-					if (test.path === HeavyTests[i]) return undefined;
+					if (skipHeavyTests && test.path === HeavyTests[i]) return undefined;
 				}
 
-				//if (test.path.indexOf("TestCases/ch06/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch07/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch08/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch09/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch10/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch11/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch12/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch13/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch14/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.1/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.2/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.3/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.4/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.5/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.6/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.7/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.8/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.9/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.10/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.11/") >= 0) return undefined;
-				//if (test.path.indexOf("TestCases/ch15/15.12/") >= 0) return undefined;
+				if (doTest06 === false && test.path.indexOf("TestCases/ch06/") >= 0) return undefined;
+				if (doTest07 === false && test.path.indexOf("TestCases/ch07/") >= 0) return undefined;
+				if (doTest08 === false && test.path.indexOf("TestCases/ch08/") >= 0) return undefined;
+				if (doTest09 === false && test.path.indexOf("TestCases/ch09/") >= 0) return undefined;
+				if (doTest10 === false && test.path.indexOf("TestCases/ch10/") >= 0) return undefined;
+				if (doTest11 === false && test.path.indexOf("TestCases/ch11/") >= 0) return undefined;
+				if (doTest12 === false && test.path.indexOf("TestCases/ch12/") >= 0) return undefined;
+				if (doTest13 === false && test.path.indexOf("TestCases/ch13/") >= 0) return undefined;
+				if (doTest14 === false && test.path.indexOf("TestCases/ch14/") >= 0) return undefined;
+				if (doTest15_1 === false && test.path.indexOf("TestCases/ch15/15.1/") >= 0) return undefined;
+				if (doTest15_2 === false && test.path.indexOf("TestCases/ch15/15.2/") >= 0) return undefined;
+				if (doTest15_3 === false && test.path.indexOf("TestCases/ch15/15.3/") >= 0) return undefined;
+				if (doTest15_4 === false && test.path.indexOf("TestCases/ch15/15.4/") >= 0) return undefined;
+				if (doTest15_5 === false && test.path.indexOf("TestCases/ch15/15.5/") >= 0) return undefined;
+				if (doTest15_6 === false && test.path.indexOf("TestCases/ch15/15.6/") >= 0) return undefined;
+				if (doTest15_7 === false && test.path.indexOf("TestCases/ch15/15.7/") >= 0) return undefined;
+				if (doTest15_8 === false && test.path.indexOf("TestCases/ch15/15.8/") >= 0) return undefined;
+				if (doTest15_9 === false && test.path.indexOf("TestCases/ch15/15.9/") >= 0) return undefined;
+				if (doTest15_10 === false && test.path.indexOf("TestCases/ch15/15.10/") >= 0) return undefined;
+				if (doTest15_11 === false && test.path.indexOf("TestCases/ch15/15.11/") >= 0) return undefined;
+				if (doTest15_12 === false && test.path.indexOf("TestCases/ch15/15.12/") >= 0) return undefined;
 
 				console.log(test.path);
 				var source = window.atob(test.code);
@@ -276,7 +334,6 @@
 				return false;
 			}
 		}
-
 	</script>
 </body>
 </html>

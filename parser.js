@@ -1135,7 +1135,7 @@ function Parser() {
 				if (current === '/') {
 					while (true) {
 						var c = proceed();
-						if (isLineTerminator(c)) {
+						if (c === undefined || isLineTerminator(c)) {
 							isLineSeparatedBehind = true;
 							break;
 						}
@@ -1187,7 +1187,9 @@ function Parser() {
 			if (isDecimalDigitChar(current)) {
 				isNumericLiteral = true;
 				setPosition(tokenPos);
-				parseNumericLiteral();
+				value = readNumericLiteral();
+				if (current === '\\' || isIdentifierStart(current)) throw VMSyntaxError();
+				return '';
 			}
 			break;
 		case '<':
@@ -1232,14 +1234,15 @@ function Parser() {
 		case '9':
 			isNumericLiteral = true;
 			setPosition(tokenPos);
-			parseNumericLiteral();
-			break;
+			value = readNumericLiteral();
+			if (current === '\\' || isIdentifierStart(current)) throw VMSyntaxError();
+			return '';
 		case '"':
 		case "'":
 			isStringLiteral = true;
 			var t = c;
 			while (true) {
-				if (isLineTerminator(current)) throw VMSyntaxError();
+				if (current === undefined || isLineTerminator(current)) throw VMSyntaxError();
 				var c = proceed();
 				if (c === t) {
 					value = source.substring(tokenPos + 1, currentPos - 1);
@@ -1274,15 +1277,11 @@ function Parser() {
 			}
 			break;
 		}
-		if (isNumericLiteral) {
-			if (current === '\\' || isIdentifierStart(current)) throw VMSyntaxError();
-			value = ToNumber(source.substring(tokenPos, currentPos));
-			return '';
-		}
 		return source.substring(tokenPos, currentPos);
 	}
 
-	function parseNumericLiteral() {
+	function readNumericLiteral() {
+		var startPos = currentPos;
 		if (current === '0') {
 			proceed();
 			if (current === 'X' || current === 'x') {
@@ -1291,14 +1290,15 @@ function Parser() {
 				while (isHexDigitChar(current)) {
 					proceed();
 				}
-				return;
+				return Number(source.substring(startPos, currentPos));
 			}
 			if (isOctalDigitChar(current)) {
 				if (strict || STRICT_CONFORMANCE) throw VMSyntaxError();
+				var x = mvDigitChar(proceed());
 				while (isOctalDigitChar(current)) {
-					proceed();
+					x = (x << 3) + mvDigitChar(proceed());
 				}
-				return;
+				return x;
 			}
 			if (current === '8' || current === '9') throw VMSyntaxError();
 		}
@@ -1321,24 +1321,25 @@ function Parser() {
 				proceed();
 			}
 		}
+		return Number(source.substring(startPos, currentPos));
 	}
 
 	function readRegExpLiteral() {
 		var pos = currentPos;
 		proceed();
 		while (true) {
-			if (isLineTerminator(current)) throw VMSyntaxError();
+			if (current === undefined || isLineTerminator(current)) throw VMSyntaxError();
 			var c = proceed();
 			if (c === '/') {
 				break;
 			}
 			if (c === '\\') {
-				if (isLineTerminator(current)) throw VMSyntaxError();
+				if (current === undefined || isLineTerminator(current)) throw VMSyntaxError();
 				proceed();
 			}
 			if (c === '[') {
 				while (true) {
-					if (isLineTerminator(current)) throw VMSyntaxError();
+					if (current === undefined || isLineTerminator(current)) throw VMSyntaxError();
 					var c = proceed();
 					if (c === ']') {
 						break;
@@ -1365,13 +1366,13 @@ function Parser() {
 		var buffer = [];
 		var t = proceed();
 		while (true) {
-			if (isLineTerminator(current)) throw VMSyntaxError();
+			if (current === undefined || isLineTerminator(current)) throw VMSyntaxError();
 			var c = proceed();
 			if (c === t) {
 				break;
 			}
 			if (c === '\\') {
-				if (isLineTerminator(current)) {
+				if (current === undefined || isLineTerminator(current)) {
 					var c = proceed();
 					if (c === '\r' && current === '\n') {
 						proceed();

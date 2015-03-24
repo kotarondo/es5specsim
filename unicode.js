@@ -68,7 +68,6 @@ function isWhiteSpace(c) {
 }
 
 function isLineTerminator(c) {
-	if (c === undefined) return true;
 	switch (c) {
 	case '\u000A': // <LF>
 	case '\u000D': // <CR>
