@@ -519,6 +519,7 @@ function Parser() {
 	}
 
 	function readDebuggerStatement() {
+		proceedToken();
 		expectingAutoSemicolon();
 		return DebuggerStatement();
 	}
