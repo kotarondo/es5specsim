@@ -761,10 +761,81 @@ function ToNumber(input) {
 	case "Number":
 		return input;
 	case "String":
-		return Number(input);
+		return parseStringNumericLiteral(input);
 	case "Object":
 		var primValue = input.DefaultValue("Number");
 		return ToNumber(primValue);
+	}
+}
+
+function parseStringNumericLiteral(input) {
+	var currentPos = 0;
+	var current = input[0];
+	var lookahead = input[1];
+	skipStrWhiteSpaces();
+	if (current === undefined) {
+		return 0;
+	}
+	var startPos = currentPos;
+	if (current === '0' && (lookahead === 'X' || lookahead === 'x')) {
+		proceed(2);
+		if (!isHexDigitChar(current)) return NaN;
+		while (isHexDigitChar(current)) {
+			proceed();
+		}
+	}
+	else {
+		if (current === '+' || current === '-') {
+			proceed();
+		}
+		if (current === 'I' && input.substring(currentPos, currentPos + 8) === "Infinity") {
+			proceed(8);
+		}
+		else {
+			if (current === '.' && !isDecimalDigitChar(lookahead)) return NaN;
+			while (isDecimalDigitChar(current)) {
+				proceed();
+			}
+			if (current === '.') {
+				proceed();
+				while (isDecimalDigitChar(current)) {
+					proceed();
+				}
+			}
+			if (current === 'E' || current === 'e') {
+				proceed();
+				if (current === '+' || current === '-') {
+					proceed();
+				}
+				if (!isDecimalDigitChar(current)) return NaN;
+				while (isDecimalDigitChar(current)) {
+					proceed();
+				}
+			}
+		}
+	}
+	var v = Number(input.substring(startPos, currentPos));
+	skipStrWhiteSpaces();
+	if (current !== undefined) {
+		return NaN;
+	}
+	return v;
+
+	function skipStrWhiteSpaces() {
+		while (isWhiteSpace(current) || isLineTerminator(current)) {
+			proceed();
+		}
+	}
+
+	function proceed(count) {
+		if (count === undefined) count = 1;
+		var c = current;
+		while (count-- !== 0) {
+			currentPos++;
+			current = lookahead;
+			lookahead = input[currentPos + 1];
+		}
+		return c;
 	}
 }
 
