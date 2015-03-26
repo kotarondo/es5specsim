@@ -76,7 +76,7 @@ function JSON_parse(thisValue, argumentsList) {
 			}
 			else {
 				var keys = [];
-				var next = value.enumerator(true, true);
+				var next = val.enumerator(true, true);
 				var P;
 				while ((P = next()) !== undefined) {
 					keys.push(P);

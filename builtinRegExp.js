@@ -700,7 +700,7 @@ function RegExpFactory() {
 				return true;
 			};
 		}
-		debugger;
+		assert(false);
 	}
 
 	function evaluateCharacterClassMatcher() {
