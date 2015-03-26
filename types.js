@@ -933,5 +933,5 @@ function SameValue(x, y) {
 			return false;
 		}
 	}
-	debugger;
+	assert(false);
 }

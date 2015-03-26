@@ -130,7 +130,7 @@ function FunctionObject_Call(thisValue, argumentsList) {
 	var F = this;
 	var funcCtx = enterExecutionContextForFunctionCode(F, thisValue, argumentsList);
 	if (F.Code === undefined) {
-		var result = CompletionValue(normal, undefined, empty);
+		var result = CompletionValue("normal", undefined, empty);
 	}
 	else {
 		var result = F.Code.evaluate();
