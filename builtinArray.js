@@ -709,7 +709,6 @@ function Array_prototype_map(thisValue, argumentsList) {
 		}
 		k++;
 	}
-	9.
 	return A;
 }
 
