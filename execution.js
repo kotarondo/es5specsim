@@ -326,7 +326,7 @@ function DeclarationBindingInstantiation(code, args, func) {
 		var dn = variables[i];
 		var varAlreadyDeclared = env.HasBinding(dn);
 		if (varAlreadyDeclared === false) {
-			env.CreateMutableBinding(dn);
+			env.CreateMutableBinding(dn, configurableBindings);
 			env.SetMutableBinding(dn, undefined, strict);
 		}
 	}
