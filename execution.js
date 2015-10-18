@@ -67,7 +67,7 @@ function DeclarativeEnvironmentRecord() {
 			if (envRec.attributes[N] <= 1) {
 				envRec.values[N] = V;
 			}
-			else throw VMTypeError();
+			else if (S === true) throw VMTypeError();
 		},
 
 		GetBindingValue : function(N, S) {
