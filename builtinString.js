@@ -450,7 +450,7 @@ function String_prototype_split(thisValue, argumentsList) {
 				if (lengthA == lim) return A;
 				var p = e;
 				var i = 0;
-				while (i !== cap.length) {
+				while (i < R.NCapturingParens) {
 					var i = i + 1;
 					A.DefineOwnProperty(ToString(lengthA), PropertyDescriptor({
 						Value : cap[i],

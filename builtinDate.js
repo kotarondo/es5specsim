@@ -181,34 +181,34 @@ function MakeDay(year, month, date) {
 		t += msPerHour * HoursPerDay * 31;
 	}
 	if (mn === 2) {
-		t += msPerHour * HoursPerDay * (59 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (59 + InLeapYear(t));
 	}
 	if (mn === 3) {
-		t += msPerHour * HoursPerDay * (90 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (90 + InLeapYear(t));
 	}
 	if (mn === 4) {
-		t += msPerHour * HoursPerDay * (120 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (120 + InLeapYear(t));
 	}
 	if (mn === 5) {
-		t += msPerHour * HoursPerDay * (151 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (151 + InLeapYear(t));
 	}
 	if (mn === 6) {
-		t += msPerHour * HoursPerDay * (181 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (181 + InLeapYear(t));
 	}
 	if (mn === 7) {
-		t += msPerHour * HoursPerDay * (212 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (212 + InLeapYear(t));
 	}
 	if (mn === 8) {
-		t += msPerHour * HoursPerDay * (243 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (243 + InLeapYear(t));
 	}
 	if (mn === 9) {
-		t += msPerHour * HoursPerDay * (273 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (273 + InLeapYear(t));
 	}
 	if (mn === 10) {
-		t += msPerHour * HoursPerDay * (304 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (304 + InLeapYear(t));
 	}
 	if (mn === 11) {
-		t += msPerHour * HoursPerDay * (334 + InLeapYear(ym));
+		t += msPerHour * HoursPerDay * (334 + InLeapYear(t));
 	}
 	if (!(YearFromTime(t) === ym && MonthFromTime(t) === mn && DateFromTime(t) === 1)) return NaN;
 	return Day(t) + dt - 1;
